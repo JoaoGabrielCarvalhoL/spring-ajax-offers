@@ -1,4 +1,4 @@
-package br.com.carv.offers.controller.domain;
+package br.com.carv.offers.domain;
 
 import java.io.Serializable;
 

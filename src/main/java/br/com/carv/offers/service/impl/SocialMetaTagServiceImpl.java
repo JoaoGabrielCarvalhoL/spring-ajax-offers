@@ -1,6 +1,6 @@
 package br.com.carv.offers.service.impl;
 
-import br.com.carv.offers.controller.domain.SocialMetaTag;
+import br.com.carv.offers.domain.SocialMetaTag;
 import br.com.carv.offers.service.SocialMetaTagService;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -31,7 +31,6 @@ public class SocialMetaTagServiceImpl implements SocialMetaTagService {
 
     private SocialMetaTag getOpenGraphByUrl(String url) {
         SocialMetaTag social = new SocialMetaTag();
-
         try {
 
             Connection connection = Jsoup.connect(url);
@@ -41,9 +40,12 @@ public class SocialMetaTagServiceImpl implements SocialMetaTagService {
             social.setSite(document.head().select("meta[property=og:site_name]").attr("content"));
             social.setUrlImage(document.head().select("meta[property=og:image]").attr("content"));
             social.setUrlPromotions(document.head().select("meta[property=og:url]").attr("content"));
+
         } catch (IOException ioException) {
             log.error("Error getting data by OpenGraph!\nMessage: " + ioException.getMessage());
             log.error("Cause: " + ioException.getCause());
+            log.info("Empty values being populated in SocialMedia");
+            return new SocialMetaTag("", "", "", "");
         }
         return social;
     }
@@ -60,18 +62,23 @@ public class SocialMetaTagServiceImpl implements SocialMetaTagService {
             social.setSite(document.head().select("meta[name=twitter:site]").attr("content"));
             social.setUrlImage(document.head().select("meta[name=twitter:image]").attr("content"));
             social.setUrlPromotions(document.head().select("meta[name=twitter:url]").attr("content"));
+
         } catch (IOException ioException) {
             log.error("Error getting data by Twitter Card!\nMessage: " + ioException.getMessage());
             log.error("Cause: " + ioException.getCause());
+            log.info("Empty values being populated in SocialMedia");
+            return new SocialMetaTag("", "", "", "");
         }
         return social;
     }
 
     private boolean isEmpty(SocialMetaTag social) {
-        if (social.getUrlImage().isEmpty() || social.getUrlPromotions().isEmpty() ||
-        social.getTitle().isEmpty() || social.getSite().isEmpty()) {
+
+        if (social.getUrlPromotions().isEmpty() || social.getUrlImage().isEmpty() ||
+                social.getTitle().isEmpty() || social.getSite().isEmpty()) {
             return true;
         }
+
         return false;
     }
 }

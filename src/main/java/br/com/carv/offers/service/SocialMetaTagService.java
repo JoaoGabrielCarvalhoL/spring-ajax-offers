@@ -1,6 +1,6 @@
 package br.com.carv.offers.service;
 
-import br.com.carv.offers.controller.domain.SocialMetaTag;
+import br.com.carv.offers.domain.SocialMetaTag;
 
 public interface SocialMetaTagService {
 
