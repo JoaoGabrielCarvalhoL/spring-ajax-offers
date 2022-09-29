@@ -19,7 +19,8 @@ public class OffersApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		SocialMetaTag social = socialMetaTagService.getOpenGraphByUrl("https://www.udemy.com/course/java-data-structures-and-algorithms-masterclass/");
-		System.out.println(social.getTitle() + "\n" + social.getSite() + "\n" + social.getUrlPromotions());
+
+		SocialMetaTag social = socialMetaTagService.getSocialMetaTagByUrl("https://www.udemy.com/course/java-data-structures-and-algorithms-masterclass/");
+		System.out.println(social.getTitle() + "\n" + social.getSite() + "\n" + social.getUrlPromotions() + "\n" + social.getUrlImage());
 	}
 }

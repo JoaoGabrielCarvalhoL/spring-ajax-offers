@@ -4,5 +4,5 @@ import br.com.carv.offers.controller.domain.SocialMetaTag;
 
 public interface SocialMetaTagService {
 
-    SocialMetaTag getOpenGraphByUrl(String url);
+    SocialMetaTag getSocialMetaTagByUrl(String url);
 }
