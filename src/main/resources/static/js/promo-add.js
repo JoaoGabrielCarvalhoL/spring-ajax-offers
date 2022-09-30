@@ -28,7 +28,7 @@ $("#linkPromocao").on('change', function() {
 				}
 			},
 			error: function() {
-				$("#alert").addClass("alert alert-danger").text("Ops... algo deu errado, tente mais tarde.");
+				$("#alert").addClass("alert alert-danger").text("Algo deu errado... Tente novamente mais tarde.");
 				$("#linkImagem").attr("src", "/images/promo-dark.png");
 			},
 			complete: function() {
