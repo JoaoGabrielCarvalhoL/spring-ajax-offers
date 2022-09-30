@@ -1,8 +1,12 @@
 package br.com.carv.offers.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -21,13 +25,17 @@ public class Promotion implements Serializable {
     private String description;
     @Column(nullable = false)
     private String urlImage;
+    @NotNull
     @NumberFormat(style = NumberFormat.Style.CURRENCY, pattern = "#,##0.00")
     @Column(nullable = false)
     private BigDecimal promotionPrice;
-
     private Integer likes;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @Column(nullable = false)
     private LocalDateTime createdAt;
+
+    @Valid
+    @NotNull(message = "Selecione a categoria da Oferta.")
     @ManyToOne
     private Category category;
 
