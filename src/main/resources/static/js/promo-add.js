@@ -1,3 +1,45 @@
+$("#form-add-promo").submit(function(evt) {
+	evt.preventDefault();
+	var promo = {};
+	promo.urlPromotion = $("#linkPromocao").val();
+	promo.description= $("#descricao").val();
+	promo.promotionPrice= $("#preco").val();
+	promo.title = $("#titulo").val();
+	promo.category = $("#categoria").val();
+	promo.urlImage = $("#linkImagem").attr("src");
+	promo.site = $("#site").text();
+
+	console.log('promo > ', promo);
+
+	$.ajax({
+		method: "POST",
+		url: "/promotions/save",
+		data: promo,
+		beforeSend: function() {
+			$("#form-add-promo").hide();
+			$("#loader-form").addClass("loader").show();
+		},
+		success: function() {
+			$("#form-add-promo").each(function() {
+				this.reset();
+			});
+			$("#linkImagem").attr("src", "/images/promo-dark.png");
+			$("#site").text("");
+			$("#alert").addClass("alert alert-success").text("Promoção cadastrada com sucesso.");
+		},
+		error: function(xhr) {
+			console.log("> error: ", xhr.responseText);
+			$("#alert").addClass("alert alert-danger").text("Não foi possível salvar esta promoção.");
+		},
+		complete: function() {
+			$("#loader-form").fadeOut(800, function() {
+				$("#form-add-promo").fadeIn(250);
+				$("#loader-form").removeClass("loader");
+			});
+		}
+	});
+});
+
 $("#linkPromocao").on('change', function() {
 
 	var url = $(this).val();
@@ -37,3 +79,4 @@ $("#linkPromocao").on('change', function() {
 		});
 	}
 });
+

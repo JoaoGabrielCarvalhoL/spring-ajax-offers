@@ -9,35 +9,25 @@ import java.time.LocalDateTime;
 
 @Entity
 public class Promotion implements Serializable {
-
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(nullable = false)
     private String title;
-
     @Column(nullable = false)
     private String urlPromotion;
-
     @Column(nullable = false)
     private String site;
-
     @Column(nullable = true)
     private String description;
-
     @Column(nullable = false)
     private String urlImage;
-
     @NumberFormat(style = NumberFormat.Style.CURRENCY, pattern = "#,##0.00")
     @Column(nullable = false)
     private BigDecimal promotionPrice;
 
-    @Column(nullable = false)
     private Integer likes;
-
     @Column(nullable = false)
     private LocalDateTime createdAt;
-
     @ManyToOne
     private Category category;
 
@@ -136,6 +126,26 @@ public class Promotion implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @PrePersist
+    public void setupDate() {
+        setCreatedAt(LocalDateTime.now());
+    }
+
+    @Override
+    public String toString() {
+        return "Promotion{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", urlPromotion='" + urlPromotion + '\'' +
+                ", site='" + site + '\'' +
+                ", description='" + description + '\'' +
+                ", urlImage='" + urlImage + '\'' +
+                ", promotionPrice=" + promotionPrice +
+                ", likes=" + likes +
+                ", createdAt=" + createdAt +
+                '}';
     }
 }
 
