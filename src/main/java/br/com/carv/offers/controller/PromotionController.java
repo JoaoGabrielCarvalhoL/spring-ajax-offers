@@ -7,9 +7,11 @@ import br.com.carv.offers.service.PromotionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -58,6 +60,18 @@ public class PromotionController {
         log.info("Promotion {}", promotion.toString());
         promotionService.save(promotion);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/list")
+    public String listPromotions(ModelMap modelMap) {
+        modelMap.addAttribute("promocoes", promotionService.findAll());
+        return "promo-list";
+    }
+
+    @GetMapping("/list/ajax")
+    public String listPromotionsCards(@RequestParam(name = "page", defaultValue = "1") Integer page, ModelMap modelMap) {
+        modelMap.addAttribute("promocoes", promotionService.findAllPage(page));
+        return "promo-card";
     }
 
 }

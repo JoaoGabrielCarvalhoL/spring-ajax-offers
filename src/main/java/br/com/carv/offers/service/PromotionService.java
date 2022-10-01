@@ -12,4 +12,5 @@ public interface PromotionService {
     void update(Promotion promotion);
     void delete(Long id);
     List<Promotion> findAll();
+    List<Promotion> findAllPage(Integer page);
 }
