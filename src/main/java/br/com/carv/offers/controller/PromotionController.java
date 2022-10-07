@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/promotions")
+    @RequestMapping("/promotions")
 public class PromotionController {
 
     private static Logger log = LoggerFactory.getLogger(PromotionController.class);

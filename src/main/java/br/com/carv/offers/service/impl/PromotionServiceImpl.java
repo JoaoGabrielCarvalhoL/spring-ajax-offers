@@ -48,14 +48,14 @@ public class PromotionServiceImpl implements PromotionService {
     @Override
     public List<Promotion> findAll() {
         Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
-        PageRequest pageRequest = PageRequest.of(0, 8, sort);
+        PageRequest pageRequest = PageRequest.of(0, 20, sort);
         return promotionRepository.findAll(pageRequest).stream().collect(Collectors.toList());
     }
 
     @Override
     public List<Promotion> findAllPage(Integer page) {
         Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
-        PageRequest pageRequest = PageRequest.of(page, 8, sort);
-        return promotionRepository.findAll(pageRequest).stream().collect(Collectors.toList());
+        //PageRequest pageRequest = PageRequest.of(page, 20, sort);
+        return promotionRepository.findAll(sort).stream().collect(Collectors.toList());
     }
 }

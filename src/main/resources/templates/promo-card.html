@@ -6,7 +6,7 @@
         <div class="card-body">
 
             <div>
-                <p class="card-subtitle mb-2 text-muted" th:text="${promo.title}">titulo</p>
+                <p class="card-subtitle mb-2 text-muted" th:text="${#strings.abbreviate(promo.title, 40)}">titulo</p>
             </div>
 
             <div>
@@ -21,6 +21,7 @@
                 <h6 class="badge badge-primary" th:text="|R$ ${{promo.promotionPrice}}|">R$ 9,99</h6>
             </div>
             <div class="btn-group">
+               <!--
                 <button th:id="${'likes-count-' + promo.id}" type="button"
                         class="btn btn-sm btn-outline-secondary"
                         th:text="${promo.likes}"></button>
@@ -28,6 +29,7 @@
                         class="btn btn-sm btn-outline-secondary">
                     <i class="far fa-thumbs-up"></i>
                 </button>
+                -->
                 <a th:href="${promo.urlPromotion}"
                    class="btn btn-sm btn-outline-secondary" role="button"
                    aria-pressed="true" target="new">Ver Oferta</a>

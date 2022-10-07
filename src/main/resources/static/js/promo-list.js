@@ -5,13 +5,10 @@ $(document).ready(function(){
 	$("#fim-btn").hide();
 });
 
-// efeito infinte scroll
 $(window).scroll(function() {
 
 	var scrollTop = $(this).scrollTop();
 	var conteudo = $(document).height() - $(window).height();
-
-	//console.log('scrollTop: ', scrollTop, ' | ', 'conteudo', conteudo);
 
 	if (scrollTop >= conteudo) {
 		pageNumber++;
@@ -34,7 +31,7 @@ function loadByScrollBar(pageNumber) {
 			$("#loader-img").show();
 		},
 		success: function( response ) {
-			//console.log("resposta > ", response);
+
 			console.log("lista > ", response.length);
 
 			if (response.length > 150) {
@@ -56,3 +53,9 @@ function loadByScrollBar(pageNumber) {
 		}
 	})
 }
+
+$("button[id*='likes-btn-']").on("click", function() {
+    var id = $(this).attr("id").split("-")[2];
+    console.log("id: ", id);
+
+});
